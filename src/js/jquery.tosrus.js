@@ -1,6 +1,6 @@
 /*
  *	jQuery Touch Optimized Sliders "R"Us 2.3.1
- *	
+ *
  *	Copyright (c) Fred Heusschen
  *	www.frebsite.nl
  *
@@ -61,7 +61,7 @@
 			//	Add markup
 			this.nodes.$wrpr = $('<div class="' + _c.wrapper + '" />');
 			this.nodes.$sldr = $('<div class="' + _c.slider + '" />').appendTo( this.nodes.$wrpr );
-	
+
 			this.nodes.$wrpr
 				.addClass( this.vars.fixed ? _c.fixed : _c.inline )
 				.addClass( _c( 'fx-' + this.opts.effect ) )
@@ -78,7 +78,7 @@
 						arguments = Array.prototype.slice.call( arguments );
 						var e = arguments.shift(),
 							t = e.type;
-	
+
 						e.stopPropagation();
 
 						if ( typeof that[ t ] == 'function' )
@@ -106,7 +106,7 @@
 							case 'toggleUI':
 								that.nodes.$wrpr.toggleClass( _c.hover );
 								break;
-							
+
 							case 'close':
 								that.close();
 								break;
@@ -393,7 +393,7 @@
 						break;
 					}
 				}
-				
+
 				//	Callback event
 				this.nodes.$wrpr.trigger( _e.sliding, [ index, direct ] );
 			}
@@ -408,7 +408,7 @@
 			{
 				for ( var m in $[ _PLUGIN_ ].media )
 				{
-					$a = $a.add( 
+					$a = $a.add(
 						this.$node.filter(
 							function()
 							{
@@ -544,7 +544,8 @@
 						if ( $slide.children().length == 0 )
 						{
 							var $anchor = $slide.data( _d.anchor ),
-								content = $anchor.attr( 'href' );
+									content = $anchor.attr( 'href' ),
+											alt = $anchor.attr('alt');
 
 							//	Search for slide content
 							for ( var m in $[ _PLUGIN_ ].media )
@@ -558,10 +559,10 @@
 								{
 									result = $[ _PLUGIN_ ].media[ m ].filterAnchors.call( that, $anchor );
 								}
-								
+
 								if ( result )
 								{
-									$[ _PLUGIN_ ].media[ m ].initAnchors.call( that, $slide, content );
+									$[ _PLUGIN_ ].media[ m ].initAnchors.call( that, $slide, content, {'alt': alt} );
 									$slide.addClass( _c( m ) );
 									break;
 								}
@@ -588,7 +589,7 @@
 					this.opts.wrapper.target = $(this.opts.wrapper.target);
 				}
 			}
-	
+
 			//	Show
 			this.opts.show = _f.complBoolean(  this.opts.show, this.opts.wrapper.target != 'window' );
 
@@ -609,7 +610,7 @@
 			this.opts.slides.slide		=   _f.complNumber( this.opts.slides.slide, this.opts.slides.visible );
 			this.opts.slides.offset 	= ( _f.isPercentage( this.opts.slides.offset ) ) ? _f.getPercentage( this.opts.slides.offset ) : _f.complNumber( this.opts.slides.offset, 0 );
 		},
-		
+
 		_uniqueID: function()
 		{
 			if ( !this.__uniqueID )
@@ -681,7 +682,7 @@
 	$[ _PLUGIN_ ].configuration = {
 		transitionDuration: 400
 	};
-	
+
 	$[ _PLUGIN_ ].constants = {};
 
 
@@ -808,10 +809,10 @@
 				return parseInt( value.slice( 0, -1 ) );
 			},
 			resizeRatio: function( $i, $o, maxWidth, maxHeight, ratio )
-			{		
+			{
 				var _w = $o.width(),
 					_h = $o.height();
-		
+
 				if ( maxWidth && _w > maxWidth )
 				{
 					_w = maxWidth;
@@ -820,7 +821,7 @@
 				{
 					_h = maxHeight;
 				}
-		
+
 				if ( _w / _h < ratio )
 				{
 					_h = _w / ratio;
